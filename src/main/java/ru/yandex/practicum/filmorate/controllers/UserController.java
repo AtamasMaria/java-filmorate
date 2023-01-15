@@ -69,7 +69,6 @@ public class UserController {
             user.setName(user.getLogin());
         }
     }
-
 }
 
 

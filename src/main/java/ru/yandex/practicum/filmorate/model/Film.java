@@ -25,5 +25,4 @@ public class Film {
     @Positive
     private Duration duration;
 
-
 }

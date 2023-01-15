@@ -62,16 +62,15 @@ public class UserControllerTest {
 
     @Test
     void shouldNotPassValidationUserWithIncorrectBirthday() {
-        user.setBirthday(LocalDate.of(2023,12,3));
+        user.setBirthday(LocalDate.of(2023, 12, 3));
         ValidationException exp = assertThrows(ValidationException.class, () -> userController.create(user));
         assertEquals(exp.getMessage(), "Birthday can't be from the future");
     }
 
     @Test
-    void  shouldNotChangeUserWithWrongId() {
+    void shouldNotChangeUserWithWrongId() {
         user.setId(32);
         ValidationException exp = assertThrows(ValidationException.class, () -> userController.update(user));
         assertEquals(exp.getMessage(), "No user with this id was found.");
     }
-
 }

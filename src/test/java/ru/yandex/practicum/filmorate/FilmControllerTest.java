@@ -72,5 +72,4 @@ public class FilmControllerTest {
         assertNotNull(exp.getMessage());
         assertEquals(exp.getMessage(), "The duration of the film cannot be negative.");
     }
-
 }
