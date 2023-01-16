@@ -23,7 +23,7 @@ public class FilmControllerTest {
                 .name("Джентельмены")
                 .description("Бизнесмен Микки Пирсон пытается продать непростой бизнесс")
                 .releaseDate(LocalDate.of(2020, 02, 13))
-                .duration(Duration.ofMinutes(113))
+                .duration(113)
                 .build();
     }
 
@@ -67,7 +67,7 @@ public class FilmControllerTest {
 
     @Test
     void shouldNotPassValidationFilmWithIncorrectDuration() {
-        film.setDuration(Duration.ofMinutes(-123));
+        film.setDuration(-34);
         ValidationException exp = assertThrows(ValidationException.class, () -> filmController.create(film));
         assertNotNull(exp.getMessage());
         assertEquals(exp.getMessage(), "The duration of the film cannot be negative.");

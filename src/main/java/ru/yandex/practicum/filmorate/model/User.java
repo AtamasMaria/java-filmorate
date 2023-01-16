@@ -9,12 +9,15 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class User {
-    @Positive
     private int id;
     @NotNull
     @Email
+    @NotBlank
+    @NotEmpty
     private String email;
     @NotBlank
+    @NotEmpty
+    @NotNull
     private String login;
     private String name;
     @PastOrPresent

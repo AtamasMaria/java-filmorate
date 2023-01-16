@@ -22,6 +22,7 @@ public class FilmController {
 
     @GetMapping
     public Collection<Film> findAll() {
+        log.debug("Количество фильмов: {}", films.size());
         return films.values();
     }
 
@@ -62,7 +63,7 @@ public class FilmController {
         } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
             log.warn("Попытка создания фильма с датой, ранее 28.12.1895.");
             throw new ValidationException("The release date cannot be earlier than 12/28/1985.");
-        } else if (film.getDuration().isNegative()) {
+        } else if (film.getDuration() <= 0) {
             log.warn("Попытка создания фильма с продолжительностью меньше нуля.");
             throw new ValidationException("The duration of the film cannot be negative.");
         }
