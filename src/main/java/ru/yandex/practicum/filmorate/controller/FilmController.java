@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.controllers;
+package ru.yandex.practicum.filmorate.controller;
 
 import javax.validation.Valid;
 
@@ -28,12 +28,12 @@ public class FilmController {
 
     @PostMapping
     public Film create(@Valid @RequestBody Film film) {
+        film.setId(++id);
         if (films.containsKey(film.getId())) {
             log.warn("Попытка добавить фильм с уже существующим id.");
             throw new ValidationException("There is already such a film.");
         } else {
-            validateFilm(film);
-            film.setId(++id);
+            //validateFilm(film);
             films.put(film.getId(), film);
             log.debug("Добавлен фильм: {}", film);
             return film;
@@ -43,7 +43,7 @@ public class FilmController {
     @PutMapping
     public Film update(@Valid @RequestBody Film film) {
         if (films.containsKey(film.getId())) {
-            validateFilm(film);
+            //validateFilm(film);
             films.put(film.getId(), film);
             log.debug("Фильм с id = {} был обновлен.", film.getId());
             return film;
@@ -53,21 +53,12 @@ public class FilmController {
         }
     }
 
-    private void validateFilm(Film film) {
-        if (film.getName() == null || film.getName().isEmpty() || film.getName().isBlank()) {
-            log.warn("Попытка добавить фильм без названия.");
-            throw new ValidationException("The title of the movie can't be empty.");
-        } else if (film.getDescription().length() > 200) {
-            log.warn("Попытка добавить фильм с описанием свыше 200 символов");
-            throw new ValidationException("The movie description exceeds the maximum number of characters 200");
-        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
+   /* private void validateFilm(Film film) {
+        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
             log.warn("Попытка создания фильма с датой, ранее 28.12.1895.");
             throw new ValidationException("The release date cannot be earlier than 12/28/1985.");
-        } else if (film.getDuration() <= 0) {
-            log.warn("Попытка создания фильма с продолжительностью меньше нуля.");
-            throw new ValidationException("The duration of the film cannot be negative.");
         }
-    }
+    }*/
 }
 
 
