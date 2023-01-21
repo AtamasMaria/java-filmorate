@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +32,6 @@ public class FilmController {
             log.warn("Попытка добавить фильм с уже существующим id.");
             throw new ValidationException("There is already such a film.");
         } else {
-            //validateFilm(film);
             films.put(film.getId(), film);
             log.debug("Добавлен фильм: {}", film);
             return film;
@@ -43,7 +41,6 @@ public class FilmController {
     @PutMapping
     public Film update(@Valid @RequestBody Film film) {
         if (films.containsKey(film.getId())) {
-            //validateFilm(film);
             films.put(film.getId(), film);
             log.debug("Фильм с id = {} был обновлен.", film.getId());
             return film;
@@ -53,12 +50,6 @@ public class FilmController {
         }
     }
 
-   /* private void validateFilm(Film film) {
-        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
-            log.warn("Попытка создания фильма с датой, ранее 28.12.1895.");
-            throw new ValidationException("The release date cannot be earlier than 12/28/1985.");
-        }
-    }*/
 }
 
 
