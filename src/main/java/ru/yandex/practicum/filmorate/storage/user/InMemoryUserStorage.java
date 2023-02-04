@@ -3,8 +3,8 @@ package ru.yandex.practicum.filmorate.storage.user;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.exception.FoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 @Component
 public class InMemoryUserStorage implements UserStorage {
     private final Map<Integer, User> users = new HashMap<>();
-    private static int id = 0;
+    private static int id;
 
     @Override
     public User create(User user) {
         if (users.containsKey(user)) {
-            throw new ValidationException("");
+            throw new FoundException(String.format("Пользователь с id=%d есть в базе", user.getId()));
         }
         if (user.getName() == null || user.getName().isEmpty() || user.getName().isBlank()) {
             log.warn("Попытка создать пользователя с пустым именем, вместо имени будет присвоен логин");
@@ -38,13 +38,13 @@ public class InMemoryUserStorage implements UserStorage {
             return user;
         } else {
             log.warn("Попытка обновить информацию о пользователе с неправильным id.");
-            throw new ValidationException("No user with this id was found.");
+            throw new UserNotFoundException("No user with this id was found.");
         }
     }
 
     @Override
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public List<User> findAllUsers() {
+        return new ArrayList<>(users.values());
     }
 
     @Override
@@ -57,10 +57,11 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public void delete(User user) {
-        if (!users.containsKey(user.getId())) {
-            throw new UserNotFoundException(String.format("Пользователь с id=%d не найден", id));
-        }
-        users.remove(user.getId());
+    public List<User> getUserFriends(Integer userId) {
+        return users.get(userId)
+                .getFriendsIds()
+                .stream()
+                .map(users::get)
+                .collect(Collectors.toList());
     }
 }
