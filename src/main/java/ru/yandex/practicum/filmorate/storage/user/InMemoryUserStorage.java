@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.exception.FoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,9 +16,6 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public User create(User user) {
-        if (users.containsKey(user)) {
-            throw new FoundException(String.format("Пользователь с id=%d есть в базе", user.getId()));
-        }
         if (user.getName() == null || user.getName().isEmpty() || user.getName().isBlank()) {
             log.warn("Попытка создать пользователя с пустым именем, вместо имени будет присвоен логин");
             user.setName(user.getLogin());

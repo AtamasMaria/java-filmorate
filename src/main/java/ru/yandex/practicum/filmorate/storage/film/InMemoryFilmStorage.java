@@ -19,10 +19,6 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public Film create(Film film) {
-        if (films.containsKey(film.getId())) {
-            log.warn("Попытка добавить фильм с уже существующим id.");
-            throw new FoundException(String.format("Фильм с id=%d есть в базе", film.getId()));
-        }
         film.setId(++id);
         films.put(film.getId(), film);
         log.debug("Добавлен фильм: {}", film);

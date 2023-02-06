@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class FilmService {
     private final FilmStorage filmStorage;
-    private final UserStorage userStorage;
+    private final UserService userService;
 
     public Film create(Film film) {
         validateReleaseDate(film, "Добавлен");
@@ -42,12 +42,12 @@ public class FilmService {
     }
 
     public void addLike(Integer filmId, Integer userId) {
-        User user = userStorage.getUserById(userId);
+        User user = userService.getUserById(userId);
         filmStorage.addLike(filmId, user.getId());
     }
 
     public void deleteLike(Integer filmId, Integer userId) {
-        User user = userStorage.getUserById(userId);
+        User user = userService.getUserById(userId);
         filmStorage.deleteLike(filmId, userId);
     }
 
