@@ -18,10 +18,12 @@ public class FilmController {
     @GetMapping
     public List<Film> getFilms() {
         return filmService.findAll();
+
     }
 
     @PostMapping
     public Film create(@Valid @RequestBody Film film) {
+
         return filmService.create(film);
     }
 
@@ -51,3 +53,4 @@ public class FilmController {
         return filmService.getPopularFilms(count);
     }
 }
+
