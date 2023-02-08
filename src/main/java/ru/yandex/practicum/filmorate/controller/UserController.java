@@ -1,57 +1,65 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import javax.validation.Valid;
-
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.UserService;
 
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 @Slf4j
 public class UserController {
-    private final Map<Integer, User> users = new HashMap<>();
-    private int id = 0;
+    private final UserService userService;
 
     @GetMapping
-    public Collection<User> findAll() {
-        return users.values();
+    public List<User> findAll() {
+        return userService.findAll();
+
     }
 
     @PostMapping
     public User create(@Valid @RequestBody User user) {
-        user.setId(++id);
-        if (users.containsKey(user.getId())) {
-            log.warn("Попытка повторной регестрации.");
-            throw new ValidationException("This email has already been registered.");
-        }
-        if (user.getName() == null || user.getName().isEmpty() || user.getName().isBlank()) {
-            log.warn("Попытка создать пользователя с пустым именем, вместо имени будет присвоен логин");
-            user.setName(user.getLogin());
-        }
-        users.put(user.getId(), user);
-        log.debug("Зарегестрирован пользователь: {}", user);
-        return user;
+
+        return userService.create(user);
+
     }
 
     @PutMapping
     public User update(@Valid @RequestBody User user) {
-        if (users.containsKey(user.getId())) {
-            users.put(user.getId(), user);
-            log.debug("Изменен пользователь: {}", user);
-            return user;
-        } else {
-            log.warn("Попытка обновить информацию о пользователе с неправильным id.");
-            throw new ValidationException("No user with this id was found.");
-        }
+
+        return userService.update(user);
+    }
+
+    @GetMapping("/{id}")
+    public User getUserById(@Valid @PathVariable("id") Integer userId) {
+        return userService.getUserById(userId);
+    }
+
+    @PutMapping("/{id}/friends/{friendId}")
+    public void addFriend(@PathVariable Integer id, @PathVariable Integer friendId) {
+        userService.addFriend(id, friendId);
+    }
+
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public void deleteFriend(@PathVariable Integer id, @PathVariable Integer friendId) {
+        userService.deleteFriend(id, friendId);
+    }
+
+    @GetMapping("/{id}/friends")
+    public List<User> getUserFriends(@PathVariable Integer id) {
+        return userService.getUserFriends(id);
+    }
+
+    @GetMapping("/{id}/friends/common/{otherId}")
+    public Set<User> getCommonFriends(@PathVariable Integer id,
+                                      @PathVariable Integer otherId) {
+        return userService.getCommonFriends(id, otherId);
     }
 }
-
-
 
