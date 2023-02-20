@@ -2,4 +2,4 @@
 Template repository for Filmorate project.
 
 Диаграмма БД
-![Диаграмма БД](https://github.com/AtamasMaria/java-filmorate/blob/main/diagram.png)
+![Диаграмма БД](https://github.com/AtamasMaria/java-filmorate/blob/main/diagrambd.png)
