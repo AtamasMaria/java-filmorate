@@ -7,9 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import ru.yandex.practicum.filmorate.annotation.CorrectReleaseDay;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
 public class Film {
@@ -25,6 +23,9 @@ public class Film {
     private Integer duration;
 
     private Set<Integer> likes;
+
+    private List<Genre> genres = new ArrayList<>();
+    private Mpa mpa;
 
     public Film(String name, String description, LocalDate releaseDate, Integer duration, Set<Integer> likes) {
         this.name = name;

@@ -27,6 +27,7 @@ public class User {
 
     private Set<Integer> friendsIds;
 
+
     public void addFriend(Integer id) {
         if (friendsIds == null) {
             friendsIds = new HashSet<>();

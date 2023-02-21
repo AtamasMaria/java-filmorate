@@ -43,7 +43,7 @@ public class InMemoryUserStorage implements UserStorage {
         return new ArrayList<>(users.values());
     }
 
-    @Override
+    @Override   
     public User getUserById(Integer userId) {
         if (!users.containsKey(userId)) {
             log.warn("Попытка получить пользователя с не существующим id");
