@@ -20,19 +20,15 @@ public class UserController {
     @GetMapping
     public List<User> findAll() {
         return userService.findAll();
-
     }
 
     @PostMapping
     public User create(@Valid @RequestBody User user) {
-
         return userService.create(user);
-
     }
 
     @PutMapping
     public User update(@Valid @RequestBody User user) {
-
         return userService.update(user);
     }
 
@@ -57,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public Set<User> getCommonFriends(@PathVariable Integer id,
+    public List<User> getCommonFriends(@PathVariable Integer id,
                                       @PathVariable Integer otherId) {
         return userService.getCommonFriends(id, otherId);
     }

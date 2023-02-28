@@ -18,7 +18,6 @@ public class FilmController {
     @GetMapping
     public List<Film> getFilms() {
         return filmService.findAll();
-
     }
 
     @PostMapping

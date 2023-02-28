@@ -1,0 +1,388 @@
+2023-02-28 23:11:38 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]" [50000-210]
+	at org.h2.message.DbException.get(DbException.java:216)
+	at org.h2.message.DbException.convert(DbException.java:414)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:120)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3296)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:585)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:461)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4056)
+	at org.h2.mvstore.db.Store.<init>(Store.java:129)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$0(JDBCDataSource.java:206)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$1(JDBCDataSource.java:225)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:223)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.openConnection(GenericDataSource.java:143)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.openConnection(H2DataSource.java:74)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:128)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.<init>(GenericDataSource.java:109)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.<init>(H2DataSource.java:43)
+	at org.jkiss.dbeaver.ext.h2.model.H2MetaModel.createDataSourceImpl(H2MetaModel.java:55)
+	at org.jkiss.dbeaver.ext.generic.GenericDataSourceProvider.openDataSource(GenericDataSourceProvider.java:106)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1195)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1060)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]" [50000-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:573)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	... 35 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:163)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:444)
+	... 29 more
+2023-02-28 23:11:43 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]" [50000-210]
+	at org.h2.message.DbException.get(DbException.java:216)
+	at org.h2.message.DbException.convert(DbException.java:414)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:120)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3296)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:585)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:461)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4056)
+	at org.h2.mvstore.db.Store.<init>(Store.java:129)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$0(JDBCDataSource.java:206)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$1(JDBCDataSource.java:225)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:223)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.openConnection(GenericDataSource.java:143)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.openConnection(H2DataSource.java:74)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:128)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.<init>(GenericDataSource.java:109)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.<init>(H2DataSource.java:43)
+	at org.jkiss.dbeaver.ext.h2.model.H2MetaModel.createDataSourceImpl(H2MetaModel.java:55)
+	at org.jkiss.dbeaver.ext.generic.GenericDataSourceProvider.openDataSource(GenericDataSourceProvider.java:106)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1195)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1060)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]" [50000-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:573)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	... 35 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/niksi/java_poject/java-filmorate/db/filmorate.mv.db [2.1.210/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:163)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:444)
+	... 29 more
+2023-02-28 23:16:49 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.populateClientAppName(GenericDataSource.java:183)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.openConnection(GenericDataSource.java:146)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.openConnection(H2DataSource.java:74)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:128)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.<init>(GenericDataSource.java:109)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.<init>(H2DataSource.java:43)
+	at org.jkiss.dbeaver.ext.h2.model.H2MetaModel.createDataSourceImpl(H2MetaModel.java:55)
+	at org.jkiss.dbeaver.ext.generic.GenericDataSourceProvider.openDataSource(GenericDataSourceProvider.java:106)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1195)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1060)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2023-02-28 23:17:09 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.populateClientAppName(GenericDataSource.java:183)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.openConnection(GenericDataSource.java:146)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.openConnection(H2DataSource.java:74)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:128)
+	at org.jkiss.dbeaver.ext.generic.model.GenericDataSource.<init>(GenericDataSource.java:109)
+	at org.jkiss.dbeaver.ext.h2.model.H2DataSource.<init>(H2DataSource.java:43)
+	at org.jkiss.dbeaver.ext.h2.model.H2MetaModel.createDataSourceImpl(H2MetaModel.java:55)
+	at org.jkiss.dbeaver.ext.generic.GenericDataSourceProvider.openDataSource(GenericDataSourceProvider.java:106)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1195)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1060)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+INSERT INTO films () VALUES() [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+INSERT INTO films () VALUES() [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select FRIEND_ID from FRIENDS where USER_ID = ? [42104-214]
+2023-03-01 01:06:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+INSERT INTO films () VALUES() [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+INSERT INTO films () VALUES() [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating, count(l.user_id) as count_films from films f left join likes l on f.film_id = l.film_id group by f.film_id, f.name, f.description, f.duration, f.releasedate, f.rating order by count_films desc limit ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+SELECT * FROM FILMS  [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]
+2023-03-01 01:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS where FILM_ID = ? [42104-214]

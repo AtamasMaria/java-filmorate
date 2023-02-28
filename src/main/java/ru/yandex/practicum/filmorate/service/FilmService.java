@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
+import ru.yandex.practicum.filmorate.storage.likes.LikesStorage;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 
 import java.util.List;
@@ -13,19 +13,20 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
 @Service
-@Slf4j
 @AllArgsConstructor
+@Slf4j
 public class FilmService {
     private final FilmStorage filmStorage;
     private final UserService userService;
+    private final LikesStorage likesStorage;
 
     public Film create(Film film) {
-        validateReleaseDate(film, "Добавлен");
+        validateFilm(film, "Добавлен");
         return filmStorage.create(film);
     }
 
     public Film update(Film film) {
-        validateReleaseDate(film, "Обновлен");
+        validateFilm(film, "Обновлен");
         return filmStorage.update(film);
     }
 
@@ -42,18 +43,28 @@ public class FilmService {
     }
 
     public void addLike(Integer filmId, Integer userId) {
+        Film film = filmStorage.getFilmById(filmId);
         User user = userService.getUserById(userId);
-        filmStorage.addLike(filmId, user.getId());
+        likesStorage.addLike(film.getId(), user.getId());
     }
 
     public void deleteLike(Integer filmId, Integer userId) {
+        Film film = filmStorage.getFilmById(filmId);
         User user = userService.getUserById(userId);
-        filmStorage.deleteLike(filmId, userId);
+        likesStorage.deleteLike(film.getId(), user.getId());
     }
 
-    public void validateReleaseDate(Film film, String text) {
+    public void validateFilm(Film film, String text) {
         if (film.getReleaseDate().isBefore( LocalDate.of(1895, 12, 28))) {
             throw new ValidationException("Дата релиза не может быть раньше " +  LocalDate.of(1895, 12, 28));
+        }
+        if (film.getName().isEmpty()||film.getName().isBlank()) {
+            log.info("Название фильма не задано");
+            throw new ValidationException("Название фильма не задано");
+        }
+        if (film.getDuration()<0) {
+            log.info("Продолжительность фильма не может быть отрицательной");
+            throw new ValidationException("Продолжительность фильма не может быть отрицательной");
         }
         log.debug("{} фильм: {}", text, film.getName());
     }

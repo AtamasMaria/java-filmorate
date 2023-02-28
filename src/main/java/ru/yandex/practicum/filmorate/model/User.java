@@ -15,7 +15,6 @@ import java.util.Set;
 
 
 @Data
-@Builder
 public class User {
     @PositiveOrZero
     private Integer id;
@@ -33,18 +32,29 @@ public class User {
 
     private Set<Integer> friendsIds;
 
-    public void addFriend(Integer id) {
-        if (friendsIds == null) {
-            friendsIds = new HashSet<>();
+
+    public User( String email, String login, String name, LocalDate birthday) {
+        this.email = email;
+        this.login = login;
+        if (name.isEmpty()) {
+            this.name = login;
         }
-        friendsIds.add(id);
+        else
+            this.name = name;
+        this.birthday = birthday;
+        friendsIds = new HashSet<>();
     }
 
-    public Set<Integer> getFriendsId() {
-        if (friendsIds == null) {
-            friendsIds = new HashSet<>();
+    public User(int id, String email, String login, String name, LocalDate birthday) {
+        this.id = id;
+        this.email = email;
+        this.login = login;
+        if (name.isEmpty()) {
+            this.name = login;
         }
-        return friendsIds;
+        else
+            this.name = name;
+        this.birthday = birthday;
     }
 
 }
