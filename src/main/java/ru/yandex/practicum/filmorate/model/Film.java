@@ -1,17 +1,22 @@
 package ru.yandex.practicum.filmorate.model;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import ru.yandex.practicum.filmorate.annotation.CorrectReleaseDay;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Film {
     @PositiveOrZero(message = "id can not be negative")
     private int id;
@@ -23,26 +28,12 @@ public class Film {
     private LocalDate releaseDate;
     @PositiveOrZero(message = "duration can not be negative")
     private Integer duration;
+    private int rate;
+    @NotNull
+    private Mpa mpa;
+    private List<Genre> genres = new ArrayList<>();
 
-    private Set<Integer> likes;
+    private List<Integer> likes = new ArrayList<>();
 
-    public Film(String name, String description, LocalDate releaseDate, Integer duration, Set<Integer> likes) {
-        this.name = name;
-        this.description = description;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
-        this.likes = Objects.requireNonNullElseGet(likes, HashSet::new);
-    }
-
-    public void addLike(Integer id) {
-        if (likes == null) {
-            likes = new HashSet<>();
-        }
-        likes.add(id);
-    }
-
-    public void deleteLike(Integer id) {
-        likes.remove(id);
-    }
 
 }

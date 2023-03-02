@@ -62,7 +62,7 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public void addLike(Integer filmId, Integer userId) {
-        films.get(filmId).addLike(userId);
+        films.get(filmId).getLikes().add(userId);
     }
 
     @Override
@@ -71,6 +71,6 @@ public class InMemoryFilmStorage implements FilmStorage {
         if (!film.getLikes().contains(userId)) {
             throw new NotFoundException("id", String.format(String.format("Фильм с id=%d не найден", id)));
         }
-        film.deleteLike(userId);
+        film.getLikes().remove(userId);
     }
 }

@@ -53,11 +53,17 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public List<User> getUserFriends(Integer userId) {
-        return users.get(userId)
-                .getFriendsIds()
-                .stream()
-                .map(users::get)
-                .collect(Collectors.toList());
+    public List<Integer> getUserFriends(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public boolean addFriend(int userId, int friendId) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteFriend(int userId, int friendId) {
+        return false;
     }
 }
