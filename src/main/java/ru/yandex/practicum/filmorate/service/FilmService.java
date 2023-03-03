@@ -17,6 +17,8 @@ public class FilmService {
     private final FilmStorage filmStorage;
     private final UserService userService;
 
+    private Integer id = 0;
+
     @Autowired
     public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage,
                        @Autowired(required = false) UserService userService) {
@@ -38,43 +40,63 @@ public class FilmService {
         return filmStorage.findAllFilms();
     }
 
-    public List<Film> getPopularFilms(Integer count) {
-        return filmStorage.getFilmsPopular(count);
+    public List<Film> getPopularFilms(String count) {
+        Integer size = intFromString(count);
+        if (size == Integer.MIN_VALUE) {
+            size = 10;
+        }
+        return filmStorage.getFilmsPopular(size);
     }
 
-    public Film getFilmById(Integer id) {
-        if (id == Integer.MIN_VALUE) {
-            throw new NotFoundException("id", "Id не был найден.");
-        }
-        Film film = filmStorage.getFilmById(id);
-        if (film == null) {
-            throw new NotFoundException("Id", "Пользователь с таким не был зарегестрирован.");
-        }
-        return film;
+    public Film getFilmById(String id) {
+        return getStoredFilm(id);
     }
 
-    public void addLike(Integer filmId, Integer userId) {
-        Film film = filmStorage.getFilmById(filmId);
+    public void addLike(String filmId, String userId) {
+        Film film = getStoredFilm(filmId);
         User user = userService.getUserById(userId);
         filmStorage.addLike(film.getId(), user.getId());
     }
 
-    public void deleteLike(Integer filmId, Integer userId) {
-        Film film = filmStorage.getFilmById(filmId);
+    public void deleteLike(String filmId, String userId) {
+        Film film = getStoredFilm(filmId);
         User user = userService.getUserById(userId);
         filmStorage.deleteLike(film.getId(), user.getId());
     }
 
     public void validateReleaseDate(Film film, String text) {
-        if (film.getReleaseDate().isBefore( LocalDate.of(1895, 12, 28))) {
-            throw new ValidationException("Дата релиза не может быть раньше " +  LocalDate.of(1895, 12, 28));
+        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
+            throw new ValidationException("Дата релиза не может быть раньше " + LocalDate.of(1895, 12, 28));
         }
-        if (film.getName().isEmpty()||film.getName().isBlank()) {
+        if (film.getName().isEmpty() || film.getName().isBlank()) {
             throw new ru.yandex.practicum.filmorate.exception.ValidationException("Название фильма не задано");
         }
-        if (film.getDuration()<0) {
+        if (film.getDuration() < 0) {
             throw new ValidationException("Продолжительность фильма не может быть отрицательной");
         }
+        if (film.getId() == 0) {
+            film.setId(++id);
+        }
 
+    }
+
+    private Integer intFromString(final String supposedInt) {
+        try {
+            return Integer.valueOf(supposedInt);
+        } catch (NumberFormatException exception) {
+            return Integer.MIN_VALUE;
+        }
+    }
+
+    private Film getStoredFilm(final String supposedId) {
+        final int filmId = intFromString(supposedId);
+        if (filmId == Integer.MIN_VALUE) {
+            throw new NotFoundException("Id", "Не удалось распознать id фильма");
+        }
+        Film film = filmStorage.getFilmById(filmId);
+        if (film == null) {
+            throw new NotFoundException("Id", "Фильм с таким не был зарегестрированю");
+        }
+        return film;
     }
 }

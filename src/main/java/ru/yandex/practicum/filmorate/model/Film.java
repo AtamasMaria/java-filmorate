@@ -32,8 +32,19 @@ public class Film {
     @NotNull
     private Mpa mpa;
     private List<Genre> genres = new ArrayList<>();
-
     private List<Integer> likes = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Film)) return false;
+        Film film = (Film) o;
+        return getId() == film.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
 }

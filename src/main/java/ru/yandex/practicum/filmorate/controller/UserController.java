@@ -43,30 +43,30 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
+    public User getUserById(@PathVariable String id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/{id}/friends/{friendId}")
-    public void addFriend(@PathVariable Integer id, @PathVariable Integer friendId) {
+    public void addFriend(@PathVariable String id, @PathVariable String friendId) {
         log.info("PUT-запрос на добавление в друзья.");
         userService.addFriend(id, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}")
-    public void deleteFriend(@PathVariable Integer id, @PathVariable Integer friendId) {
+    public void deleteFriend(@PathVariable String id, @PathVariable String friendId) {
         log.info("DELETE-запрос на удаление из друзей.");
         userService.deleteFriend(id, friendId);
     }
 
     @GetMapping("/{id}/friends")
-    public Collection<User> getUserFriends(@PathVariable Integer id) {
+    public Collection<User> getUserFriends(@PathVariable String id) {
         log.info("GET-запрос на получение друзей пользователя с id.");
         return  userService.getUserFriends(id);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public Collection<User> getCommonFriends(@PathVariable Integer id, @PathVariable Integer otherId) {
+    public Collection<User> getCommonFriends(@PathVariable String id, @PathVariable String otherId) {
         log.info("GET-запрос на получение общих друзей.");
         return userService.getCommonFriends(id, otherId);
     }

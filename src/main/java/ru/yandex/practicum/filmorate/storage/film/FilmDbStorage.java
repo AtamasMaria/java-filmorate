@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -14,9 +17,7 @@ import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.service.GenreService;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -29,22 +30,16 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public Film create(Film film) {
-        String sql = "INSERT INTO films(name, description, release_date, duration, rate, mpa_id)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, film.getName());
-            preparedStatement.setString(2, film.getDescription());
-            preparedStatement.setInt(3, film.getDuration());
-            preparedStatement.setDate(4, Date.valueOf(film.getReleaseDate()));
-            preparedStatement.setInt(5, film.getRate());
-            preparedStatement.setInt(6, Math.toIntExact(film.getMpa().getId()));
-            return preparedStatement;
-        }, keyHolder);
-
-        int id = Objects.requireNonNull(keyHolder.getKey()).intValue();
-        film.setId(id);
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcInsert.withTableName("films").usingGeneratedKeyColumns("film_id");
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("name", film.getName())
+                .addValue("description", film.getDescription())
+                .addValue("release_date", film.getReleaseDate())
+                .addValue("duration", film.getDuration())
+                .addValue("mpa_id", film.getMpa().getId());
+        Number num = jdbcInsert.executeAndReturnKey(parameters);
+        film.setId(num.intValue());
 
 
         if (!film.getGenres().isEmpty()) {
@@ -55,7 +50,7 @@ public class FilmDbStorage implements FilmStorage {
                 addLike(film.getId(), userId);
             }
         }
-        return getFilmById(id);
+        return film;
     }
 
     @Override

@@ -6,16 +6,22 @@ DELETE FROM LIKES;
 DELETE FROM GENRES;
 DELETE FROM MPA;
 
-insert into GENRES(GENRE_ID, NAME) VALUES ( '1','Комедия' );
-insert into GENRES(GENRE_ID, NAME) VALUES ( '2','Драма' );
-insert into GENRES(GENRE_ID, NAME) VALUES ( '3','Мультфильм' );
-insert into GENRES(GENRE_ID, NAME) VALUES ( '4','Триллер' );
-insert into GENRES(GENRE_ID, NAME) VALUES ( '5','Документальный' );
-insert into GENRES(GENRE_ID, NAME) VALUES ( '6','Боевик' );
+ALTER TABLE USERS ALTER COLUMN USER_ID RESTART WITH 1;
+ALTER TABLE FILMS ALTER COLUMN FILM_ID RESTART WITH 1;
 
-insert into MPA(MPA_ID, NAME, DESCRIPTION) VALUES ( '1','G', 'Нет возрастных ограничений');
-insert into MPA(MPA_ID, NAME, DESCRIPTION) VALUES ( '2','PG', 'Рекомендуется присутствие родителей');
-insert into MPA(MPA_ID, NAME, DESCRIPTION) VALUES ( '3','PG-13', 'Детям до 13 лет просмотр не желателен');
-insert into MPA(MPA_ID, NAME, DESCRIPTION) VALUES ( '4','R', 'Лицам до 17 лет обязательно присутствие взрослого');
-insert into MPA(MPA_ID, NAME, DESCRIPTION) VALUES ( '5','NC-17', 'Лицам до 18 лет просмотр запрещен');
+MERGE INTO MPA KEY(MPA_ID)
+    VALUES (1, 'G', 'Нет возрастных ограничений'),
+    (2, 'PG', 'Рекомендуется присутствие родителей'),
+    (3, 'PG-13', 'Детям до 13 лет просмотр не желателен'),
+    (4, 'R', 'Лицам до 17 лет обязательно присутствие взрослого'),
+    (5, 'NC-17', 'Лицам до 18 лет просмотр запрещен');
+
+MERGE INTO GENRES KEY(GENRE_ID)
+    VALUES (1, 'Комедия'),
+    (2, 'Драма'),
+    (3, 'Мультфильм'),
+    (4, 'Триллер'),
+    (5, 'Документальный'),
+    (6, 'Боевик');
+
 

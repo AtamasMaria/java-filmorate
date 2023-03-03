@@ -23,17 +23,19 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User create(User user) {
-        String sql = "INSERT INTO users (email, login, name, birthday) VALUES (?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO USERS " +
+                "(EMAIL, LOGIN, NAME, BIRTHDAY) " +
+                "values (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-                    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    ps.setString(1, user.getEmail());
-                    ps.setString(2, user.getLogin());
-                    ps.setString(3, user.getName());
-                    ps.setDate(4, Date.valueOf(user.getBirthday()));
-                    return ps;
-                },
-                keyHolder);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setDate(4, Date.valueOf(user.getBirthday()));
+
+            return preparedStatement;
+        }, keyHolder);
 
         int id = Objects.requireNonNull(keyHolder.getKey()).intValue();
 
@@ -47,7 +49,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User update(User user) {
-        String sql = "UPDATE users SET email=?, login=?, name=?, birthday=? WHERE user_id=?";
+        String sql = "UPDATE USERS SET EMAIL=?, LOGIN=?, NAME=?, BIRTHDAY=? WHERE USER_ID=?";
         jdbcTemplate.update(sql, user.getEmail(), user.getLogin(), user.getName(), user.getBirthday(), user.getId());
         return getUserById(user.getId());
     }
