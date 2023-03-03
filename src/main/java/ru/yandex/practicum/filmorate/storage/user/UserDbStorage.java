@@ -23,9 +23,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User create(User user) {
-        String sqlQuery = "INSERT INTO USERS " +
-                "(EMAIL, LOGIN, NAME, BIRTHDAY) " +
-                "values (?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO USERS (email, login, name, birthday) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
@@ -33,7 +31,6 @@ public class UserDbStorage implements UserStorage {
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getName());
             preparedStatement.setDate(4, Date.valueOf(user.getBirthday()));
-
             return preparedStatement;
         }, keyHolder);
 
@@ -49,7 +46,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User update(User user) {
-        String sql = "UPDATE USERS SET EMAIL=?, LOGIN=?, NAME=?, BIRTHDAY=? WHERE USER_ID=?";
+        String sql = "UPDATE users SET email=?, login=?, name=?, birthday=? WHERE user_id=?";
         jdbcTemplate.update(sql, user.getEmail(), user.getLogin(), user.getName(), user.getBirthday(), user.getId());
         return getUserById(user.getId());
     }
@@ -89,7 +86,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public List<Integer> getUserFriends(Integer userId) {
-        String sqlGetFriends = "select FRIENDID from FRIENDSHIP where USERID = ?";
+        String sqlGetFriends = "SELECT friend_id FROM friends WHERE user_id=?";
         return jdbcTemplate.queryForList(sqlGetFriends, Integer.class, userId);
     }
 

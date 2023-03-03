@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.user.UserStorage;
@@ -18,7 +17,6 @@ import java.util.List;
 @Slf4j
 public class UserService {
     private final UserStorage userStorage;
-    private Integer id = 0;
 
     @Autowired
     public UserService(@Qualifier("UserDbStorage") UserStorage userStorage) {
@@ -39,24 +37,24 @@ public class UserService {
         return userStorage.findAllUsers();
     }
 
-    public User getUserById(String userId) {
-        return getStoredUser(userId);
+    public User getUserById(Integer userId) {
+        return userStorage.getUserById(userId);
     }
 
-    public void addFriend(String userId, String friendId) {
-        User user = getStoredUser(userId);
-        User friend = getStoredUser(friendId);
+    public void addFriend(Integer userId, Integer friendId) {
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
         userStorage.addFriend(user.getId(), friend.getId());
     }
 
-    public void deleteFriend(String userId, String friendId) {
-        User user = getStoredUser(userId);
-        User friend = getStoredUser(friendId);
+    public void deleteFriend(Integer userId, Integer friendId) {
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
         userStorage.deleteFriend(user.getId(), friend.getId());
     }
 
-    public Collection<User> getUserFriends(String userId) {
-        User user = getStoredUser(userId);
+    public Collection<User> getUserFriends(Integer userId) {
+        User user = getUserById(userId);
         Collection<User> friends = new HashSet<>();
         for (Integer id : user.getFriendsIds()) {
             friends.add(userStorage.getUserById(id));
@@ -64,9 +62,9 @@ public class UserService {
         return friends;
     }
 
-    public Collection<User> getCommonFriends(String userId, String otherId) {
-        User user = getStoredUser(userId);
-        User otherUser = getStoredUser(otherId);
+    public Collection<User> getCommonFriends(Integer userId, Integer otherId) {
+        User user = getUserById(userId);
+        User otherUser = getUserById(otherId);
         Collection<User> commonFriends = new HashSet<>();
         for (Integer id : user.getFriendsIds()) {
             if (otherUser.getFriendsIds().contains(id)) {
@@ -93,28 +91,5 @@ public class UserService {
             log.warn("Попытка создать пользователя с пустым именем, вместо имени будет присвоен логин");
             user.setName(user.getLogin());
         }
-        if (user.getId() == 0) {
-            user.setId(++id);
-        }
-    }
-
-    private Integer idFromString(final String supposedId) {
-        try {
-            return Integer.valueOf(supposedId);
-        } catch (NumberFormatException exception) {
-            return Integer.MIN_VALUE;
-        }
-    }
-
-    private User getStoredUser(final String supposedId) {
-        final int userId = idFromString(supposedId);
-        if (userId == Integer.MIN_VALUE) {
-            throw new NotFoundException("Id", "Не найден пользователь с таким id.");
-        }
-        User user = userStorage.getUserById(userId);
-        if (user == null) {
-            throw new NotFoundException("Id", "Пользователь с таким id не зарегестрирован.");
-        }
-        return user;
     }
 }

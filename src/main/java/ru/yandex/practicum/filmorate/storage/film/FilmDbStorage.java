@@ -7,8 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
@@ -35,12 +33,11 @@ public class FilmDbStorage implements FilmStorage {
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("name", film.getName())
                 .addValue("description", film.getDescription())
-                .addValue("release_date", film.getReleaseDate())
                 .addValue("duration", film.getDuration())
+                .addValue("releasedate", film.getReleaseDate())
                 .addValue("mpa_id", film.getMpa().getId());
         Number num = jdbcInsert.executeAndReturnKey(parameters);
         film.setId(num.intValue());
-
 
         if (!film.getGenres().isEmpty()) {
             genreService.addFilmGenres(film.getId(), film.getGenres());
@@ -55,7 +52,7 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public Film update(Film film) {
-        String sql = "UPDATE films SET name=?, description=?, duration=?, relrase_date=?," +
+        String sql = "UPDATE films SET name=?, description=?, duration=?, relrasedate=?," +
                 " rate=?, mpa_id=? WHERE film_id=?";
         jdbcTemplate.update(sql,
                 film.getName(),
@@ -80,25 +77,25 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public List<Film> findAllFilms() {
-        String sql = "SELECT * FROM films INNER JOIN MPA M on FILM.mpa_id=M.mpa_id";
+        String sql = "SELECT * FROM films INNER JOIN mpa m on films.mpa_id=m.mpa_id";
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Film(
                         rs.getInt("film_id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
+                        Objects.requireNonNull(rs.getDate("releasedate")).toLocalDate(),
                         rs.getInt("duration"),
                         rs.getInt("rate"),
-                        new Mpa(rs.getInt("mpa.mpa_id"),
-                                rs.getString("mpa.name"),
-                                rs.getString("mpa.description")),
+                        new Mpa(rs.getInt("m.mpa_id"),
+                                rs.getString("m.name"),
+                                rs.getString("m.description")),
                         (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
                         getFilmLikes(rs.getInt("film_id"))));
     }
 
     @Override
     public List<Film> getFilmsPopular(Integer count) {
-        String sql = "SELECT f.film_id, f.name, f.description, f.release_date, f.duration, f.rate, " +
+        String sql = "SELECT f.film_id, f.name, f.description,  f.duration, f.release_date, f.rate, " +
                 "f.mpa_id, count(l.user_id) as count_films " +
                 "from films f LEFT JOIN likes l on f.film_id = l.film_id " +
                 "GROUP BY f.film_id ORDER BY count_films DESC limit ?";
@@ -107,12 +104,12 @@ public class FilmDbStorage implements FilmStorage {
                                 rs.getInt("film_id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
-                                Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
+                                Objects.requireNonNull(rs.getDate("releasedate")).toLocalDate(),
                                 rs.getInt("duration"),
                                 rs.getInt("rate"),
-                                new Mpa(rs.getInt("mpa.mpa_id"),
-                                        rs.getString("mpa.name"),
-                                        rs.getString("mpa.description")),
+                                new Mpa(rs.getInt("m.mpa_id"),
+                                        rs.getString("m.name"),
+                                        rs.getString("m.description")),
                                 (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
                                 getFilmLikes(rs.getInt("film_id"))),
                 count);
@@ -130,12 +127,12 @@ public class FilmDbStorage implements FilmStorage {
                             rs.getInt("film_id"),
                             rs.getString("name"),
                             rs.getString("description"),
-                            Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
+                            Objects.requireNonNull(rs.getDate("releasedate")).toLocalDate(),
                             rs.getInt("duration"),
                             rs.getInt("rate"),
-                            new Mpa(rs.getInt("mpa.mpa_id"),
-                                    rs.getString("mpa.name"),
-                                    rs.getString("mpa.description")),
+                            new Mpa(rs.getInt("m.mpa_id"),
+                                    rs.getString("m.name"),
+                                    rs.getString("m.description")),
                             (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
                             getFilmLikes(rs.getInt("film_id"))),
                     filmId);
