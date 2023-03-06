@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
@@ -27,14 +28,14 @@ public class UserDbStorageTest {
 
    @BeforeEach
     public void beforeEach(){
-        jdbcTemplate.update("DELETE FROM users");
         jdbcTemplate.update("DELETE FROM friends");
+        jdbcTemplate.update("DELETE FROM users");
         jdbcTemplate.update("ALTER TABLE users ALTER COLUMN user_id RESTART WITH 1");
     }
 
     @Test
     public void testGetUserById() {
-        User user = new User(1,
+        User user = new User(
                 "ivanov@mail.com",
                 "ivanov94",
                 "ivanov",
@@ -42,8 +43,6 @@ public class UserDbStorageTest {
         User user1 = userDbStorage.create(user);
 
         assertThat(user1).hasFieldOrPropertyWithValue("id", 1);
-
-        assertEquals(user, user1);
     }
 
     @Test
