@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import ru.yandex.practicum.filmorate.exception.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
@@ -16,6 +17,8 @@ import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.service.GenreService;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 @Component("FilmDbStorage")
@@ -42,24 +45,18 @@ public class FilmDbStorage implements FilmStorage {
         if (!film.getGenres().isEmpty()) {
             genreService.addFilmGenres(film.getId(), film.getGenres());
         }
-        if (film.getLikes() != null) {
-            for (Integer userId : film.getLikes()) {
-                addLike(film.getId(), userId);
-            }
-        }
         return film;
     }
 
     @Override
     public Film update(Film film) {
         String sql = "UPDATE films SET name=?, description=?, duration=?, release_date=?," +
-                " rate=?, mpa_id=? WHERE film_id=?";
+                " mpa_id=? WHERE film_id=?";
         jdbcTemplate.update(sql,
                 film.getName(),
                 film.getDescription(),
                 film.getDuration(),
                 film.getReleaseDate(),
-                film.getRate(),
                 film.getMpa().getId(),
                 film.getId());
 
@@ -67,30 +64,13 @@ public class FilmDbStorage implements FilmStorage {
         if (!film.getGenres().isEmpty()) {
             genreService.addFilmGenres(film.getId(), film.getGenres());
         }
-        if (film.getLikes() != null) {
-            for (Integer userId : film.getLikes()) {
-                addLike(film.getId(), userId);
-            }
-        }
         return getFilmById(film.getId());
     }
 
     @Override
     public List<Film> findAllFilms() {
         String sql = "SELECT * FROM films f INNER JOIN mpa m on f.mpa_id=m.mpa_id";
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
-                new Film(
-                        rs.getInt("film_id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
-                        rs.getInt("duration"),
-                        rs.getInt("rate"),
-                        new Mpa(rs.getInt("mpa.mpa_id"),
-                                rs.getString("mpa.name"),
-                                rs.getString("mpa.description")),
-                        (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
-                        getFilmLikes(rs.getInt("film_id"))));
+        return jdbcTemplate.query(sql, (rs, rowNum) -> makeFilm(rs));
     }
 
     @Override
@@ -122,23 +102,10 @@ public class FilmDbStorage implements FilmStorage {
                 "INNER JOIN mpa m ON f.mpa_id=m.mpa_id WHERE f.film_id=?";
         Film film;
         try {
-            film = jdbcTemplate.queryForObject(sqlFilm, (rs, rowNum) ->
-                            new Film(
-                                    rs.getInt("film_id"),
-                                    rs.getString("name"),
-                                    rs.getString("description"),
-                                    Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
-                                    rs.getInt("duration"),
-                                    rs.getInt("rate"),
-                                    new Mpa(rs.getInt("mpa.mpa_id"),
-                                            rs.getString("mpa.name"),
-                                            rs.getString("mpa.description")),
-                                    (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
-                                    getFilmLikes(rs.getInt("film_id"))),
-                    filmId);
+            film = jdbcTemplate.queryForObject(sqlFilm, (rs, rowNum) -> makeFilm(rs), filmId);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("Film", "Фильм не был найден.");
+            throw new FilmNotFoundException("Фильм не был найден.");
         }
         log.info("Найден фильм: {} {}", film.getId(), film.getName());
         return film;
@@ -149,11 +116,9 @@ public class FilmDbStorage implements FilmStorage {
         String sql = "SELECT * FROM likes WHERE user_id=? AND film_id=?";
         SqlRowSet existLike = jdbcTemplate.queryForRowSet(sql, userId, filmId);
         if (!existLike.next()) {
-            String setLike = "INSERT INTO likes (user_id, film_id) VALUES (?, ?) ";
+            String setLike = "INSERT INTO likes (user_id, film_id) VALUES (?, ?)  ON CONFLICT DO NOTHING ";
             jdbcTemplate.update(setLike, userId, filmId);
         }
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, userId, filmId);
-        log.info(String.valueOf(sqlRowSet.next()));
     }
 
     @Override
@@ -165,5 +130,21 @@ public class FilmDbStorage implements FilmStorage {
     private List<Integer> getFilmLikes(int filmId) {
         String sql = "SELECT user_id FROM likes WHERE film_id=?";
         return jdbcTemplate.queryForList(sql, Integer.class, filmId);
+    }
+
+    private Film makeFilm(ResultSet rs) throws SQLException {
+        int id = rs.getInt("film_id");
+        return new Film(
+                rs.getInt("film_id"),
+                rs.getString("name"),
+                rs.getString("description"),
+                Objects.requireNonNull(rs.getDate("release_date")).toLocalDate(),
+                rs.getInt("duration"),
+                new Mpa(rs.getInt("mpa.mpa_id"),
+                        rs.getString("mpa.name"),
+                        rs.getString("mpa.description")),
+                (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
+                getFilmLikes(rs.getInt("film_id")));
+
     }
 }

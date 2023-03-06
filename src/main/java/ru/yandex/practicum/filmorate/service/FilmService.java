@@ -48,9 +48,6 @@ public class FilmService {
             throw new NotFoundException("id", "Id не был найден.");
         }
         Film film = filmStorage.getFilmById(id);
-        if (film == null) {
-            throw new NotFoundException("Id", "Пользователь с таким не был зарегестрирован.");
-        }
         return film;
     }
 

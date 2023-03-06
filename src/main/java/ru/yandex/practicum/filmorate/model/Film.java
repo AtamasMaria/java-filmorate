@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Data
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Film {
@@ -28,11 +27,42 @@ public class Film {
     private LocalDate releaseDate;
     @PositiveOrZero(message = "duration can not be negative")
     private Integer duration;
-    private int rate;
     @NotNull
     private Mpa mpa;
     private List<Genre> genres = new ArrayList<>();
     private List<Integer> likes = new ArrayList<>();
+
+    public Film(int id, String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa, List<Genre> genres) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.mpa = mpa;
+        this.genres = genres;
+    }
+
+    public Film( String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa, List<Genre> genres) {
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.mpa = mpa;
+        this.genres = genres;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Film)) return false;
+        Film film = (Film) o;
+        return getId() == film.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
 
 }

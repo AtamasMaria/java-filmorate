@@ -11,9 +11,7 @@ import ru.yandex.practicum.filmorate.annotation.CorrectLogin;
 
 import java.time.LocalDate;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Data
@@ -37,11 +35,33 @@ public class User {
     private List<Integer> friendsIds;
 
 
+
+    public User(String email, String login, String name, LocalDate birthday) {
+        this.email = email;
+        this.login = login;
+        this.name = name;
+        this.birthday = birthday;
+    }
+
     public User(Integer id, String email, String login, String name, LocalDate birthday) {
         this.id = id;
         this.email = email;
         this.login = login;
         this.name = name;
         this.birthday = birthday;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId() == user.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

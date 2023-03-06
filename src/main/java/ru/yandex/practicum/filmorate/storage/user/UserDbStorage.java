@@ -6,11 +6,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import ru.yandex.practicum.filmorate.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -52,13 +54,7 @@ public class UserDbStorage implements UserStorage {
     @Override
     public List<User> findAllUsers() {
         String sql = "SELECT * FROM users";
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
-                new User(
-                        rs.getInt("user_id"),
-                        rs.getString("email"),
-                        rs.getString("login"),
-                        rs.getString("name"),
-                        Objects.requireNonNull(rs.getDate("birthday")).toLocalDate()));
+        return jdbcTemplate.query(sql, (rs, rowNum) -> makeUser(rs));
     }
 
     @Override
@@ -66,16 +62,10 @@ public class UserDbStorage implements UserStorage {
         String sqlUser = "SELECT * FROM users WHERE user_id=?";
         User user;
         try {
-            user = jdbcTemplate.queryForObject(sqlUser, (rs, rowNum) ->
-                    new User(
-                            rs.getInt("user_id"),
-                            rs.getString("email"),
-                            rs.getString("login"),
-                            rs.getString("name"),
-                            Objects.requireNonNull(rs.getDate("birthday")).toLocalDate()), userId);
+            user = jdbcTemplate.queryForObject(sqlUser, (rs, rowNum) -> makeUser(rs), userId);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("Пользован с таким id не зарегестрирован.");
+            throw new UserNotFoundException("Пользован с таким id не зарегестрирован.");
         }
         return user;
     }
@@ -85,13 +75,7 @@ public class UserDbStorage implements UserStorage {
         checkUserExist(userId);
         String sql = "select * from users u, friends f where f.user_id = ? and u.user_id = f.friend_id";
 
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
-                new User(
-                        rs.getInt("user_id"),
-                        rs.getString("email"),
-                        rs.getString("login"),
-                        rs.getString("name"),
-                        Objects.requireNonNull(rs.getDate("birthday")).toLocalDate()), userId);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> makeUser(rs), userId);
     }
 
     @Override
@@ -116,7 +100,7 @@ public class UserDbStorage implements UserStorage {
         String sql = "SELECT EXISTS (SELECT * FROM users WHERE user_id = ?)";
         Boolean exists = jdbcTemplate.queryForObject(sql, Boolean.class, id);
         if (!exists) {
-            throw new NotFoundException(String.format("Пользователь не был обнаружен."));
+            throw new UserNotFoundException(String.format("Пользователь не был обнаружен."));
         }
     }
 
@@ -128,13 +112,17 @@ public class UserDbStorage implements UserStorage {
         String sql = "SELECT * FROM users u, friends f, friends o where u.user_id = f.friend_id and u.user_id = o.friend_id " +
                 "and f.user_id=? and o.user_id=?";
 
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
-                        new User(
-                                rs.getInt("user_id"),
-                                rs.getString("email"),
-                                rs.getString("login"),
-                                rs.getString("name"),
-                                Objects.requireNonNull(rs.getDate("birthday")).toLocalDate()),
+        return jdbcTemplate.query(sql, (rs, rowNum) -> makeUser(rs),
                 userId, otherId);
+    }
+
+    private User makeUser(ResultSet rs) throws SQLException {
+        int id = rs.getInt("user_id");
+        return new User(
+                id,
+                rs.getString("email"),
+                rs.getString("login"),
+                rs.getString("name"),
+                Objects.requireNonNull(rs.getDate("birthday")).toLocalDate());
     }
 }
