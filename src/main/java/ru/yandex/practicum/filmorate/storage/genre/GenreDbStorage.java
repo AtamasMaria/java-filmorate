@@ -3,11 +3,19 @@ package ru.yandex.practicum.filmorate.storage.genre;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 @Component
 @AllArgsConstructor
@@ -23,8 +31,8 @@ public class GenreDbStorage implements GenreStorage {
 
     @Override
     public Collection<Genre> getGenresByFilmId(int filmId) {
-        String sql = "SELECT g.genre_id, name FROM genres g " +
-                "INNER JOIN film_genres fg on g.genre_id = fg.genre_id WHERE film_id=?";
+        String sql = "SELECT * FROM genres WHERE genre_id IN " +
+                "(SELECT genre_id FROM film_genres WHERE film_id=?)";
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Genre(rs.getInt("genre_id"), rs.getString("name")), filmId);
     }
@@ -56,5 +64,24 @@ public class GenreDbStorage implements GenreStorage {
         String sql = "DELETE FROM film_genres WHERE film_id=?";
         jdbcTemplate.update(sql, filmId);
         return true;
+    }
+
+    @Override
+    public Map<Integer, Film> getGenresByFilmIds(Map<Integer, Film> allFilms) {
+        Set<Integer> filmsIds = allFilms.keySet();
+        SqlParameterSource param = new MapSqlParameterSource("filmsId", filmsIds);
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        String sql = "SELECT g.genres, g.name, fg.film_id FROM genres g " +
+                " INNER JOIN film_genres fg ON g.genre_id=fg.genre_id " +
+                "WHERE film_id IN (:film_id)";
+        namedParameterJdbcTemplate.query(sql, param, (rs, rowNum) -> {
+            Film film = allFilms.get(rs.getInt("film_id"));
+            return film.getGenres().add(
+                    new Genre(
+                            rs.getInt("genre_id"),
+                            rs.getString("name")
+                    ));
+        });
+        return allFilms;
     }
 }

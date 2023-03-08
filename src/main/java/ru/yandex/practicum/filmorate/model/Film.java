@@ -16,6 +16,7 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 public class Film {
     @PositiveOrZero(message = "id can not be negative")
     private int id;
@@ -32,14 +33,15 @@ public class Film {
     private List<Genre> genres = new ArrayList<>();
     private List<Integer> likes = new ArrayList<>();
 
-    public Film(int id, String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa, List<Genre> genres) {
+    public Film(int id, String name, String description, LocalDate releaseDate,
+                Integer duration, Mpa mpa, List<Integer> likes) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
         this.duration = duration;
         this.mpa = mpa;
-        this.genres = genres;
+        this.likes = likes;
     }
 
     public Film( String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa, List<Genre> genres) {
@@ -48,21 +50,8 @@ public class Film {
         this.releaseDate = releaseDate;
         this.duration = duration;
         this.mpa = mpa;
-        this.genres = genres;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Film)) return false;
-        Film film = (Film) o;
-        return getId() == film.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 
 
 }

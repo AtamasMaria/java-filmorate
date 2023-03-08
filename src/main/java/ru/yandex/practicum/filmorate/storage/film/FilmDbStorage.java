@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -70,29 +71,15 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public List<Film> findAllFilms() {
         String sql = "SELECT * FROM films f INNER JOIN mpa m on f.mpa_id=m.mpa_id";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> makeFilm(rs));
+        return jdbcTemplate.query(sql, this::makeFilm);
     }
 
     @Override
     public List<Film> getFilmsPopular(Integer count) {
-        String sql = "SELECT f.film_id FROM films f JOIN likes l ON f.film_id = l.film_id " +
+        String sql = "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id " +
+                "JOIN mpa m ON f.mpa_id = m.mpa_id" +
                 "GROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ?";
-
-        List<Film> sortedFilmsByLikes = new LinkedList<>(jdbcTemplate.query(sql,
-                (rs, rowNum) -> getFilmById(rs.getInt("film_id")), count));
-
-        Collection<Film> filmsWithoutLikes = new ArrayList<>();
-
-        if (sortedFilmsByLikes.size() == 0 || sortedFilmsByLikes.size() < count) {
-            int limit = count - sortedFilmsByLikes.size();
-            String sql2 = "SELECT film_id FROM films where film_id NOT IN" +
-                    " (SELECT film_id FROM likes GROUP BY film_id) limit ?";
-            filmsWithoutLikes.addAll(jdbcTemplate.query(sql2,
-                    (rs, rowNum) -> getFilmById(rs.getInt("film_id")), limit));
-        }
-        sortedFilmsByLikes.addAll(filmsWithoutLikes);
-
-        return sortedFilmsByLikes;
+        return jdbcTemplate.query(sql, this::makeFilm, count);
     }
 
     @Override
@@ -102,9 +89,8 @@ public class FilmDbStorage implements FilmStorage {
                 "INNER JOIN mpa m ON f.mpa_id=m.mpa_id WHERE f.film_id=?";
         Film film;
         try {
-            film = jdbcTemplate.queryForObject(sqlFilm, (rs, rowNum) -> makeFilm(rs), filmId);
-        }
-        catch (EmptyResultDataAccessException e) {
+            film = jdbcTemplate.queryForObject(sqlFilm, this::makeFilm, filmId);
+        } catch (EmptyResultDataAccessException e) {
             throw new FilmNotFoundException("Фильм не был найден.");
         }
         log.info("Найден фильм: {} {}", film.getId(), film.getName());
@@ -113,12 +99,9 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public void addLike(Integer filmId, Integer userId) {
-        String sql = "SELECT * FROM likes WHERE user_id=? AND film_id=?";
-        SqlRowSet existLike = jdbcTemplate.queryForRowSet(sql, userId, filmId);
-        if (!existLike.next()) {
-            String setLike = "INSERT INTO likes (user_id, film_id) VALUES (?, ?)  ON CONFLICT DO NOTHING ";
-            jdbcTemplate.update(setLike, userId, filmId);
-        }
+        String setLike = "INSERT INTO likes (user_id, film_id) VALUES (?, ?)  ON CONFLICT DO NOTHING ";
+        jdbcTemplate.update(setLike, userId, filmId);
+
     }
 
     @Override
@@ -132,7 +115,7 @@ public class FilmDbStorage implements FilmStorage {
         return jdbcTemplate.queryForList(sql, Integer.class, filmId);
     }
 
-    private Film makeFilm(ResultSet rs) throws SQLException {
+    private Film makeFilm(ResultSet rs, int rowNum) throws SQLException {
         int id = rs.getInt("film_id");
         return new Film(
                 rs.getInt("film_id"),
@@ -143,8 +126,7 @@ public class FilmDbStorage implements FilmStorage {
                 new Mpa(rs.getInt("mpa.mpa_id"),
                         rs.getString("mpa.name"),
                         rs.getString("mpa.description")),
-                (List<Genre>) genreService.getFilmGenres(rs.getInt("film_id")),
+                new ArrayList<>(),
                 getFilmLikes(rs.getInt("film_id")));
-
     }
 }

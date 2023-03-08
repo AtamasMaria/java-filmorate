@@ -9,20 +9,26 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Service
 public class FilmService {
     private final FilmStorage filmStorage;
     private final UserService userService;
+    private final GenreService genreService;
 
     @Autowired
     public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage,
-                       @Autowired(required = false) UserService userService) {
+                       @Autowired(required = false) UserService userService,
+                       GenreService genreService) {
         this.filmStorage = filmStorage;
         this.userService = userService;
+        this.genreService = genreService;
     }
 
     public Film create(Film film) {
@@ -36,11 +42,21 @@ public class FilmService {
     }
 
     public List<Film> findAll() {
-        return filmStorage.findAllFilms();
+        List<Film> allFilms = filmStorage.findAllFilms();
+        Map<Integer, Film> map = new HashMap<>();
+        for (Film film : allFilms) {
+            map.put(film.getId(), film);
+        }
+        return new ArrayList<>(genreService.getAllGenresByFilms(map).values());
     }
 
     public List<Film> getPopularFilms(Integer count) {
-        return filmStorage.getFilmsPopular(count);
+        List<Film> popularFilms = filmStorage.getFilmsPopular(count);
+        Map<Integer, Film> map = new HashMap<>();
+        for (Film film : popularFilms) {
+            map.put(film.getId(), film);
+        }
+        return new ArrayList<>(genreService.getAllGenresByFilms(map).values());
     }
 
     public Film getFilmById(Integer id) {

@@ -5179,3 +5179,171 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "LIKES_BY_USERS" не найдена
 Table "LIKES_BY_USERS" not found; SQL statement:
 select exists (select * from likes_by_users where id_film = ? and id_user = ?) [42102-214]
+2023-03-07 23:21:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:21:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:21:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:24:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:24:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:24:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:56:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:56:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:56:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:59:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-07 23:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 16:54:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 16:54:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 16:54:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 21:35:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 21:35:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 21:35:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:26:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:26:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:26:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:27:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:27:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:27:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:30:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:30:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:30:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:34:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:34:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:34:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:40:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:40:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:40:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:44:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:44:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 22:44:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:01:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:01:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:01:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:30:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:30:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
+2023-03-08 23:30:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"
+Syntax error in SQL statement "SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP [*]BY f.film_id ORDER BY count(l.user_id) DESC limit ?"; SQL statement:
+SELECT f.* FROM films f LEFT JOIN likes l ON f.film_id = l.film_id JOIN mpa m ON f.mpa_id = m.mpa_idGROUP BY f.film_id ORDER BY count(l.user_id) DESC limit ? [42000-214]
