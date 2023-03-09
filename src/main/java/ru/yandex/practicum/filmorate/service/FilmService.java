@@ -23,9 +23,7 @@ public class FilmService {
     private final GenreService genreService;
 
     @Autowired
-    public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage,
-                       @Autowired(required = false) UserService userService,
-                       GenreService genreService) {
+    public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage, @Autowired(required = false) UserService userService, GenreService genreService) {
         this.filmStorage = filmStorage;
         this.userService = userService;
         this.genreService = genreService;
@@ -41,8 +39,7 @@ public class FilmService {
         Film film1 = filmStorage.update(film);
         Map<Integer, Film> map = new HashMap<>();
         map.put(film1.getId(), film1);
-        Film film2 = genreService.getAllGenresByFilms(map).get(film1.getId());
-        return film2;
+        return genreService.getAllGenresByFilms(map).get(film1.getId());
     }
 
     public List<Film> findAll() {
@@ -86,13 +83,13 @@ public class FilmService {
     }
 
     public void validateReleaseDate(Film film, String text) {
-        if (film.getReleaseDate().isBefore( LocalDate.of(1895, 12, 28))) {
-            throw new ValidationException("Дата релиза не может быть раньше " +  LocalDate.of(1895, 12, 28));
+        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
+            throw new ValidationException("Дата релиза не может быть раньше " + LocalDate.of(1895, 12, 28));
         }
-        if (film.getName().isEmpty()||film.getName().isBlank()) {
+        if (film.getName().isEmpty() || film.getName().isBlank()) {
             throw new ru.yandex.practicum.filmorate.exception.ValidationException("Название фильма не задано");
         }
-        if (film.getDuration()<0) {
+        if (film.getDuration() < 0) {
             throw new ValidationException("Продолжительность фильма не может быть отрицательной");
         }
     }
