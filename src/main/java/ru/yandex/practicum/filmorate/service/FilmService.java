@@ -38,7 +38,11 @@ public class FilmService {
 
     public Film update(Film film) {
         validateReleaseDate(film, "Обновлен");
-        return filmStorage.update(film);
+        Film film1 = filmStorage.update(film);
+        Map<Integer, Film> map = new HashMap<>();
+        map.put(film1.getId(), film1);
+        Film film2 = genreService.getAllGenresByFilms(map).get(film1.getId());
+        return film2;
     }
 
     public List<Film> findAll() {
@@ -64,7 +68,9 @@ public class FilmService {
             throw new NotFoundException("id", "Id не был найден.");
         }
         Film film = filmStorage.getFilmById(id);
-        return film;
+        Map<Integer, Film> map = new HashMap<>();
+        map.put(film.getId(), film);
+        return genreService.getAllGenresByFilms(map).get(film.getId());
     }
 
     public void addLike(Integer filmId, Integer userId) {

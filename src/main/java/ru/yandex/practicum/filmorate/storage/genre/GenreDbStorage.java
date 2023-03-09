@@ -69,11 +69,14 @@ public class GenreDbStorage implements GenreStorage {
     @Override
     public Map<Integer, Film> getGenresByFilmIds(Map<Integer, Film> allFilms) {
         Set<Integer> filmsIds = allFilms.keySet();
+        if (filmsIds.isEmpty()) {
+            return allFilms;
+        }
         SqlParameterSource param = new MapSqlParameterSource("filmsId", filmsIds);
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        String sql = "SELECT g.genres, g.name, fg.film_id FROM genres g " +
+        String sql = "SELECT g.genre_id, g.name, fg.film_id FROM genres g " +
                 " INNER JOIN film_genres fg ON g.genre_id=fg.genre_id " +
-                "WHERE film_id IN (:film_id)";
+                "WHERE fg.film_id IN (:filmsId)";
         namedParameterJdbcTemplate.query(sql, param, (rs, rowNum) -> {
             Film film = allFilms.get(rs.getInt("film_id"));
             return film.getGenres().add(
