@@ -1,17 +1,22 @@
 package ru.yandex.practicum.filmorate.model;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import ru.yandex.practicum.filmorate.annotation.CorrectReleaseDay;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 public class Film {
     @PositiveOrZero(message = "id can not be negative")
     private int id;
@@ -23,26 +28,30 @@ public class Film {
     private LocalDate releaseDate;
     @PositiveOrZero(message = "duration can not be negative")
     private Integer duration;
+    @NotNull
+    private Mpa mpa;
+    private List<Genre> genres = new ArrayList<>();
+    private List<Integer> likes = new ArrayList<>();
 
-    private Set<Integer> likes;
-
-    public Film(String name, String description, LocalDate releaseDate, Integer duration, Set<Integer> likes) {
+    public Film(int id, String name, String description, LocalDate releaseDate,
+                Integer duration, Mpa mpa, List<Integer> likes) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
         this.duration = duration;
-        this.likes = Objects.requireNonNullElseGet(likes, HashSet::new);
+        this.mpa = mpa;
+        this.likes = likes;
     }
 
-    public void addLike(Integer id) {
-        if (likes == null) {
-            likes = new HashSet<>();
-        }
-        likes.add(id);
+    public Film( String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa, List<Genre> genres) {
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.mpa = mpa;
     }
 
-    public void deleteLike(Integer id) {
-        likes.remove(id);
-    }
+
 
 }

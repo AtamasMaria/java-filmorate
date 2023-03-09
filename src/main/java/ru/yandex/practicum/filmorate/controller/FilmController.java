@@ -3,20 +3,26 @@ package ru.yandex.practicum.filmorate.controller;
 import javax.validation.Valid;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
 @RequestMapping("/films")
-@AllArgsConstructor
+@Slf4j
+@RequiredArgsConstructor
 public class FilmController {
     private final FilmService filmService;
 
     @GetMapping
     public List<Film> getFilms() {
+        log.info("GET-запрос на получение всех фильмов.");
         return filmService.findAll();
 
     }
@@ -24,26 +30,31 @@ public class FilmController {
     @PostMapping
     public Film create(@Valid @RequestBody Film film) {
 
+        log.info("POST-запрос на создание фильма.");
         return filmService.create(film);
     }
 
     @PutMapping
     public Film update(@RequestBody Film film) {
+        log.info("PUT-запрос на обновление фильма.");
         return filmService.update(film);
     }
 
     @GetMapping("/{id}")
     public Film getFilmById(@PathVariable Integer id) {
+        log.info("GET-запрос на получение фильма по id.");
         return filmService.getFilmById(id);
     }
 
     @PutMapping("/{filmId}/like/{userId}")
     public void addLike(@PathVariable Integer filmId, @PathVariable Integer userId) {
+        log.info("PUT-запрос на добавление лайка.");
         filmService.addLike(filmId, userId);
     }
 
     @DeleteMapping("/{filmId}/like/{userId}")
     public void deleteLike(@PathVariable Integer filmId, @PathVariable Integer userId) {
+        log.info("DELETE-запрос на удаление лайка.");
         filmService.deleteLike(filmId, userId);
     }
 
@@ -53,4 +64,3 @@ public class FilmController {
         return filmService.getPopularFilms(count);
     }
 }
-

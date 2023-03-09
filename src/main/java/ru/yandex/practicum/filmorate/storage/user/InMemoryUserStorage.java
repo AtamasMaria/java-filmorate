@@ -52,12 +52,20 @@ public class InMemoryUserStorage implements UserStorage {
         return users.get(userId);
     }
 
+    public Collection<User> getUserFriends(Integer userId) {
+        return null;
+    }
+
     @Override
-    public List<User> getUserFriends(Integer userId) {
-        return users.get(userId)
-                .getFriendsIds()
-                .stream()
-                .map(users::get)
-                .collect(Collectors.toList());
+    public void addFriend(Integer userId, Integer friendId) {
+    }
+
+    @Override
+    public void deleteFriend(Integer userId, Integer friendId) {
+    }
+
+    @Override
+    public Collection<User> getCommonFriends(Integer userId, Integer otherId) {
+        return null;
     }
 }

@@ -3,19 +3,19 @@ package ru.yandex.practicum.filmorate.model;
 import javax.validation.constraints.*;
 
 
-
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import ru.yandex.practicum.filmorate.annotation.CorrectLogin;
 
 import java.time.LocalDate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"id"})
 public class User {
     @PositiveOrZero
     private Integer id;
@@ -30,21 +30,22 @@ public class User {
     private String name;
     @PastOrPresent(message = "Birthday can't be from the future.")
     private LocalDate birthday;
+    private List<Integer> friendsIds;
 
-    private Set<Integer> friendsIds;
 
-    public void addFriend(Integer id) {
-        if (friendsIds == null) {
-            friendsIds = new HashSet<>();
-        }
-        friendsIds.add(id);
+
+    public User(String email, String login, String name, LocalDate birthday) {
+        this.email = email;
+        this.login = login;
+        this.name = name;
+        this.birthday = birthday;
     }
 
-    public Set<Integer> getFriendsId() {
-        if (friendsIds == null) {
-            friendsIds = new HashSet<>();
-        }
-        return friendsIds;
+    public User(Integer id, String email, String login, String name, LocalDate birthday) {
+        this.id = id;
+        this.email = email;
+        this.login = login;
+        this.name = name;
+        this.birthday = birthday;
     }
-
 }

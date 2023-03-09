@@ -1,23 +1,33 @@
 package ru.yandex.practicum.filmorate.service;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
+import java.util.Map;
 
 @Service
-@Slf4j
-@AllArgsConstructor
 public class FilmService {
     private final FilmStorage filmStorage;
     private final UserService userService;
+    private final GenreService genreService;
+
+    @Autowired
+    public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage, @Autowired(required = false) UserService userService, GenreService genreService) {
+        this.filmStorage = filmStorage;
+        this.userService = userService;
+        this.genreService = genreService;
+    }
 
     public Film create(Film film) {
         validateReleaseDate(film, "Добавлен");
@@ -26,35 +36,61 @@ public class FilmService {
 
     public Film update(Film film) {
         validateReleaseDate(film, "Обновлен");
-        return filmStorage.update(film);
+        Film film1 = filmStorage.update(film);
+        Map<Integer, Film> map = new HashMap<>();
+        map.put(film1.getId(), film1);
+        return genreService.getAllGenresByFilms(map).get(film1.getId());
     }
 
     public List<Film> findAll() {
-        return filmStorage.findAllFilms();
+        List<Film> allFilms = filmStorage.findAllFilms();
+        Map<Integer, Film> map = new HashMap<>();
+        for (Film film : allFilms) {
+            map.put(film.getId(), film);
+        }
+        return new ArrayList<>(genreService.getAllGenresByFilms(map).values());
     }
 
     public List<Film> getPopularFilms(Integer count) {
-        return filmStorage.getFilmsPopular(count);
+        List<Film> popularFilms = filmStorage.getFilmsPopular(count);
+        Map<Integer, Film> map = new HashMap<>();
+        for (Film film : popularFilms) {
+            map.put(film.getId(), film);
+        }
+        return new ArrayList<>(genreService.getAllGenresByFilms(map).values());
     }
 
     public Film getFilmById(Integer id) {
-        return filmStorage.getFilmById(id);
+        if (id == Integer.MIN_VALUE) {
+            throw new NotFoundException("id", "Id не был найден.");
+        }
+        Film film = filmStorage.getFilmById(id);
+        Map<Integer, Film> map = new HashMap<>();
+        map.put(film.getId(), film);
+        return genreService.getAllGenresByFilms(map).get(film.getId());
     }
 
     public void addLike(Integer filmId, Integer userId) {
+        Film film = filmStorage.getFilmById(filmId);
         User user = userService.getUserById(userId);
-        filmStorage.addLike(filmId, user.getId());
+        filmStorage.addLike(film.getId(), user.getId());
     }
 
     public void deleteLike(Integer filmId, Integer userId) {
+        Film film = filmStorage.getFilmById(filmId);
         User user = userService.getUserById(userId);
-        filmStorage.deleteLike(filmId, userId);
+        filmStorage.deleteLike(film.getId(), user.getId());
     }
 
     public void validateReleaseDate(Film film, String text) {
-        if (film.getReleaseDate().isBefore( LocalDate.of(1895, 12, 28))) {
-            throw new ValidationException("Дата релиза не может быть раньше " +  LocalDate.of(1895, 12, 28));
+        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
+            throw new ValidationException("Дата релиза не может быть раньше " + LocalDate.of(1895, 12, 28));
         }
-        log.debug("{} фильм: {}", text, film.getName());
+        if (film.getName().isEmpty() || film.getName().isBlank()) {
+            throw new ru.yandex.practicum.filmorate.exception.ValidationException("Название фильма не задано");
+        }
+        if (film.getDuration() < 0) {
+            throw new ValidationException("Продолжительность фильма не может быть отрицательной");
+        }
     }
 }
