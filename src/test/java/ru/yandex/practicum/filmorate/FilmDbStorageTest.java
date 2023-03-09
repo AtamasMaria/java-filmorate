@@ -80,8 +80,10 @@ class FilmDbStorageTest {
         Film filmCreate2 = filmDbStorage.create(film2);
 
         Collection<Film> dbFilms = filmDbStorage.findAllFilms();
+        Film filmUpdate1 = filmDbStorage.update(filmCreate1);
+        Film filmUpdate2 = filmDbStorage.update(filmCreate2);
         assertEquals(2, dbFilms.size());
-        assertEquals(filmDbStorage.findAllFilms(), List.of(filmCreate1, filmCreate2));
+        assertEquals(filmDbStorage.findAllFilms(), List.of(filmUpdate1, filmUpdate2));
     }
 
     @Test
@@ -224,7 +226,9 @@ class FilmDbStorageTest {
         filmDbStorage.addLike(filmCreate1.getId(), userCreate2.getId());
 
         filmDbStorage.addLike(filmCreate2.getId(), userCreate1.getId());
+        Film filmUpdate1 = filmDbStorage.update(filmCreate1);
+        Film filmUpdate2 = filmDbStorage.update(filmCreate2);
 
-        assertEquals(filmDbStorage.getFilmsPopular(10), List.of(filmCreate1, filmCreate2));
+        assertEquals(filmDbStorage.getFilmsPopular(10), List.of(filmUpdate1, filmUpdate2));
     }
 }
